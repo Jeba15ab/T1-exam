@@ -8,6 +8,12 @@ class Order {
 
     }
 
+    addItemToCart(item){
+        
+        this.items.push(item);
+
+    }
+
     getOrderFromStorage(){
         var orderJson = localStorage.getItem("order");
 
