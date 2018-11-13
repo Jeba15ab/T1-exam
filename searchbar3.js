@@ -455,7 +455,7 @@ lamps.push(new Lamp(
 );}
 
  // THis is to display the Lamp array as soon as we reach the page
-var content = ""
+var content = "";
 
 for (var i = 0; i < lamps.length; i++) {
     content += lamps[i].createHTML()
@@ -467,6 +467,13 @@ addEvents();
     // First we will grab the element by its ID! 
 var filterInput = document.getElementById('filterInput');
 
+var filterType = "";
+var filterColor = "";
+var filterUnivers = "": 
+
+// Eventlistener på onChange af dropdown der sætter filtertype... FRA HENRIK HER
+
+
 // Now we add the event listener (keyUp), and then call the function that searches/filters through our lamp selection:
 filterInput.addEventListener('keyup', function(){
     // We now need the value of the search. We do not just want the element, so we add Value in the end
@@ -476,9 +483,15 @@ filterInput.addEventListener('keyup', function(){
     var html = "";
 
     for (var i = 0; i < lamps.length; i++) {
+        // FRA HENRIK HER: Filter, så den ikke viser ting der ikke matcher filtertype - men ikke gør noget hvis filtertype = ""
+
+
+
         if (lamps[i].type.indexOf(filterValue) > -1 || lamps[i].color.indexOf(filterValue) > -1 || lamps[i].price.indexOf(filterValue) > -1
             || lamps[i].movie.indexOf(filterValue) > -1 || lamps[i].character.indexOf(filterValue) > -1 
         ) {
+
+            
             html += lamps[i].createHTML();
         } else {
             continue;
@@ -514,6 +527,9 @@ function addEvents(){
         }
     }
 }
+
+
+
 
 
 

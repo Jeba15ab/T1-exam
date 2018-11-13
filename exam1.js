@@ -78,7 +78,7 @@ document.getElementById("register").addEventListener("click",function(){
 // New Users Registering: 
     var newerUser = new User(registerEmail, registerFullName, registerStreetName, registerZipCode, registerCity, registerPassword, repeatPassword);
 
-    for (var i = 0; i < users.length; i++) {  //Reversing the logic here could make sense!'
+    for (var i = 0; i < users.length; i++) { 
     console.log("for loop called")
 //First we test the email criteria
         if (valEmail(registerEmail) && registerEmail !== users[i].email) {
