@@ -26,6 +26,7 @@ var shoppingCart = (function () {
     //The setItem() method of the Storage interface, when passed a key name and value, will add that key to the storage.
 
 
+
     function saveCart() {
         localStorage.setItem("shoppingCart", JSON.stringify(cart));
     }
@@ -38,6 +39,7 @@ var shoppingCart = (function () {
     }
 
     loadCart();
+
 
 
     // Public methods and properties
@@ -74,6 +76,7 @@ var shoppingCart = (function () {
         saveCart();
     };
 
+
     obj.removeItemFromCart = function (name) { // Removes one item
         for (var i in cart) {
             if (cart[i].name === name) {       // "3" === 3 false, (triple equal checks whether the value to the left and right is the same value and type.)
@@ -82,12 +85,14 @@ var shoppingCart = (function () {
                     cart.splice(i, 1);         // The splice() method adds/removes items to/from an array, and returns the removed item(s).
                                                // in this case our position is item [i] and the number we want to remove 1. 
 
+
                 }
                 break;
             }
         }
         saveCart();
     };
+
 
     obj.removeItemFromCartAll = function (name) { // removes all item name
         for (var i in cart) {
@@ -99,10 +104,12 @@ var shoppingCart = (function () {
         saveCart();
     };
 
+
     obj.clearCart = function () {
         cart = [];
         saveCart();
     }
+
 
     obj.countCart = function () { // -> return total count
         var totalCount = 0;        
@@ -147,5 +154,4 @@ var shoppingCart = (function () {
     // ----------------------------
     return obj;
 })();
-
 

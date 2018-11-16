@@ -1,33 +1,7 @@
-var showCart = document.getElementById('show-cart');
-var countCart = document.getElementById('count-cart');
-var totalCart = document.getElementById('total-cart');
 
-function displayCart() {
-    var cartArray = shoppingCart.listCart();
-    console.log(cartArray);
-    var output = "";
-    for (var i in cartArray) {
-        output += "<li>"
-            + cartArray[i].name
-            + " <input class='item-count' type='number' data-name='"
-            + cartArray[i].name
-            + "' value='" + cartArray[i].count + "' >"
-            + " x " + cartArray[i].price
-            + " = " + cartArray[i].total
-            + " <button class='plus-item' data-name='"
-            + cartArray[i].name + "'>+</button>"
-            + " <button class='subtract-item' data-name='"
-            + cartArray[i].name + "'>-</button>"
-            + " <button class='delete-item' data-name='"
-            + cartArray[i].name + "'>X</button>"
-            + "</li>";
-    }
 
-    showCart.innerHTML = output;
-    countCart.innerHTML = shoppingCart.countCart();
-    totalCart.innerHTML = shoppingCart.totalCart();
 
-    var deleteItemButtons = document.getElementsByClassName('delete-item');
+
 /* Instead of searching in the HTML for our objects (lamps), 
 we can make a class of them in the JS file.*/
 class Lamp {
@@ -390,6 +364,7 @@ lamps.push(new Lamp(
 );
 
 
+
 lamps.push(new Lamp(
     "Floor Lamp",
     "Red",
@@ -497,19 +472,14 @@ var filterInput = document.getElementById('filterInput');
 // Now we add the event listener (keyUp), and then call the function that searches/filters through our lamp selection:
 filterInput.addEventListener('keyup', function(){
     // We now need the value of the search. We do not just want the element, so we add Value in the end
-    var filterValue = document.getElementById('filterInput').value;
+    var filterValue = document.getElementById('filterInput').value
     console.log(filterValue);
-    var filterValueLowerCase = '';
-    if(filterValue !== ''){
-        filterValueLowerCase = filterValue.toLowerCase();
-    }
-
+    
     var html = "";
 
     for (var i = 0; i < lamps.length; i++) {
-        if (lamps[i].type.toLowerCase().indexOf(filterValueLowerCase) > -1 || lamps[i].color.toLowerCase().indexOf(filterValueLowerCase) > -1
-            || lamps[i].price.indexOf(filterValueLowerCase) > -1
-            || lamps[i].movie.toLowerCase().indexOf(filterValueLowerCase) > -1 || lamps[i].character.toLowerCase().indexOf(filterValueLowerCase) > -1 
+        if (lamps[i].type.indexOf(filterValue) > -1 || lamps[i].color.indexOf(filterValue) > -1 || lamps[i].price.indexOf(filterValue) > -1
+            || lamps[i].movie.indexOf(filterValue) > -1 || lamps[i].character.indexOf(filterValue) > -1 
         ) {
             html += lamps[i].createHTML();
         } else {
@@ -519,6 +489,7 @@ filterInput.addEventListener('keyup', function(){
     document.getElementById("lamps").innerHTML = html;
     addEvents();
 });
+
 
 
 function addEvents(){
@@ -540,51 +511,175 @@ function addEvents(){
                 order.items.push(item)
                 
                 order.saveOrderToStorage();
-                var name = product.type + ", " + product.character + " from " + product.movie; 
-                shoppingCart.addItemToCart(name, product.price, 1);
-                displayCart();
                 console.log(item)
             });
         }
     }
 }
 
-for (let deleteItem of deleteItemButtons) {
-    deleteItem.addEventListener('click', function (event) {
-        var name = this.getAttribute("data-name");
-        shoppingCart.removeItemFromCartAll(name);
-        displayCart();
-    });
+
+
+
+/* Frederiks's shopping cart
+
+        function saveCart() {
+        localStorage.setItem("shoppingCart", JSON.stringify(cart));
+    }
+
+    function loadCart() {
+        cart = JSON.parse(localStorage.getItem("shoppingCart"));
+        if (cart === null) {
+            cart = []
+        }
+    }
+
+    loadCart();
+
+
+
+    // Public methods and properties
+    var obj = {};
+
+    // for (var i in cart) = indicates that we loop through every item in the cart 
+    // were going to look at each item individually --> look at the name property and match it with name (name === name)
+    // if they match = we will increase the count of that item. 
+    // cart[i].count; lets us increase the count of the item after the loop
+    
+    obj.addItemToCart = function (name, price, count) {
+        for (var i in cart) {
+            if (cart[i].name === name) {
+                cart[i].count += count; //add count to whatever value of count property here is. 
+                saveCart();
+                return; //return; this will end our function and break the loop
+            }
+        }
+
+        console.log("addItemToCart:", name, price, count);
+
+        var item = new Item(name, price, count); //we only want this code, if we dont find the item in the cart (above loop). this creates a new item.
+        cart.push(item);
+        saveCart();
+    };
+
+    obj.setCountForItem = function (name, count) {
+        for (var i in cart) {
+            if (cart[i].name === name) {
+                cart[i].count = count;
+                break;
+            }
+        }
+        saveCart();
+    };
+
+
+    obj.removeItemFromCart = function (name) { // Removes one item
+        for (var i in cart) {
+            if (cart[i].name === name) {       // "3" === 3 false, (triple equal checks whether the value to the left and right is the same value and type.)
+                cart[i].count--;               // cart[i].count -- (subtracting 1)
+                if (cart[i].count === 0) {     // we dont want the name of to appear in the cart, if there is zero items. 
+                    cart.splice(i, 1);         // The splice() method adds/removes items to/from an array, and returns the removed item(s).
+                                               // in this case our position is item [i] and the number we want to remove 1. 
+
+
+                }
+                break;
+            }
+        }
+        saveCart();
+    };
+
+
+    obj.removeItemFromCartAll = function (name) { // removes all item name
+        for (var i in cart) {
+            if (cart[i].name === name) {
+                cart.splice(i, 1);                // in this case, we just need to find the item, and splice it out of the array. 
+                break;
+            }
+        }
+        saveCart();
+    };
+
+
+    obj.clearCart = function () {
+        cart = [];
+        saveCart();
+    }
+
+
+    obj.countCart = function () { // -> return total count
+        var totalCount = 0;        
+        for (var i in cart) {
+            totalCount += cart[i].count;
+        }
+
+        return totalCount;
+    };
+
+    // .toFixed() function is going to round the numeric values to a fixed number of decimal places.
+    // the (2) after toFixed, indicates that we want two decimal places, which we want when showing the price. 
+
+    obj.totalCart = function () { // -> return total cost
+        var totalCost = 0;
+        for (var i in cart) {
+            totalCost += cart[i].price * cart[i].count;  // the "+=" adds the price for each item in the cart.
+        }
+        return totalCost.toFixed(2);                     // to.Fixed(2) = Convert a number into a string, keeping only two decimals.
+
+    };
+
+    //the property ".total" = adds the total of the name and the price. 
+
+    obj.listCart = function () { // -> array of Items
+        var cartCopy = [];
+        console.log("Listing cart");
+        console.log(cart);
+        for (var i in cart) {
+            console.log(i);
+            var item = cart[i];
+            var itemCopy = {};
+            for (var p in item) {              // looping through every property in item
+                itemCopy[p] = item[p];         // make that a property in Copy and give it the same value
+            }
+            itemCopy.total = (item.price * item.count).toFixed(2);
+            cartCopy.push(itemCopy);
+        }
+        return cartCopy;
+    };
+
+    // ----------------------------
+    return obj;
+})();
+
+
+
+__________________________________________________________________________________________
+
+
+    // we now need all the collection items (class) within the ul: 
+    // get li´s from ul
+    // We will get the li´s with the class of collection items! we can select things based on classes (or anything else), not just by ID! 
+    var li = ul.querySelectorAll('li.collection-item');  // THIS SHOULD BE CHANGED OR DELETED SINCE WE HAVE THE ARRAY
+
+    // the collection-items is now being put into a sort of array, 
+    // and we want to loop through that array og selection-item li´s:
+    for (var i = 0; i < lamps.length; i++){   // LI.LENGTH SHOULD BE CHANGED TO THE ARRAY WE WILL LOOP THROUGH 
+    console.log('check 1');
+    // Remember, they have been wrapped in an a tag, so we can use getElementByTagName:
+          var a = lamps[i].getElementsByTagName('a')[0]; //we add the 0 to only get the current link 
+
+    // we now want to check if the input matches our index 
+    // innerHTML will check the name inside the a tag. If < than -1 means there is a match
+          if(a.innerHTML.indexOf(filterValue) > - 1) {
+    //we dont want it do anything if there is a match, so we set the css styling to nothing, and if else we want it to disappear.
+              li[i].style.display = ''; //(i meaning the current ideration) this is how set it to not do anything
+              console.log('check 2');
+          } else {
+            li[i].style.display = 'none'; // notice the difference between nothing and none! 
+            console.log('check 3');
+          }
+
+    }
+
 }
 
-var subtractItemButtons = document.getElementsByClassName('subtract-item');    
-for (let subtractItem of subtractItemButtons) {
-    subtractItem.addEventListener('click', function (event) {
-        var name = this.getAttribute("data-name");
-        shoppingCart.removeItemFromCart(name);
-        displayCart();
-    });
-}
-
-var plusItemButtons = document.getElementsByClassName('plus-item');
-for (let plusItemButton of plusItemButtons) {
-    plusItemButton.addEventListener('click', function (event) {
-        var name = this.getAttribute("data-name");
-        shoppingCart.addItemToCart(name, 0, 1);
-        displayCart();
-    });
-}
-
-var itemCountItems = document.getElementsByClassName('item-count');
-for (let itemCountItem of itemCountItems) {
-    itemCountItem.addEventListener('change', function (event) {
-        var name = this.getAttribute("data-name");
-        var count = Number($(this).val());
-        shoppingCart.setCountForItem(name, count);
-        displayCart();
-    });
-}
-}
-
-displayCart();
-
+*/

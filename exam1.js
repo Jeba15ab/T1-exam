@@ -102,8 +102,7 @@ document.getElementById("register").addEventListener("click",function(){
                 return false
             }       
 // Now we check the Zip Code criteria
-        if (inputOnlyNumbers.test(registerZipCode) && registerZipCode.length == 4 && !registerZipCode.startsWith("0") &&
-        registerPassword === repeatPassword) {
+        if (inputOnlyNumbers.test(registerZipCode) && registerZipCode.length == 4 && !registerZipCode.startsWith("0")) {
         }
         else {
             document.getElementById('registerResult').textContent = 'Your Zip code does not fulfill the requirements';
