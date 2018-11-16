@@ -17,21 +17,20 @@
             What lamp are you looking for?
         </h1>
         <!-- Here people can search for e.g. categories, we can change this into e.g. color -->
-        <input type="text" placeholder="What lamp you looking for?" name="filterInput" id="filterInput">
+        <input type="text" placeholder="What lamp you looking for?" name="searchInput" id="searchInput">
         <!-- Change this to filterType -->
 
         <!-- Adding dropdown -->
         <form id="filter">
             <div>
                 <label for="Filter">Narrow your search here!</label>
-                <select name="Type">
+                <select name="Type" id="type">
                     <option value="">Type</option>
-                    <option value="Celing">Celing Lamp</option>
+                    <option value="Ceiling">Celing Lamp</option>
                     <option value="Desk">Desk Lamp</option>
-                    <option value="Floor">Floor Lamp</option>
                 </select>
 
-                <select name="Color">
+                <select name="Color" id="color">
                     <option value="">Color</option>
                     <option value="Green">Green</option>
                     <option value="Red">Red</option>
@@ -43,7 +42,7 @@
                     <option value="Yellow">Yellow</option>
                 </select>
 
-                <select name="Universe">
+                <select name="Universe" id="universe">
                     <option value="" id="universe">Universe</option>
                     <option value="Disney">Disney</option>
                     <option value="Marvel">Marvel</option>
@@ -51,6 +50,8 @@
                 </select>
             </div>
         </form>
+
+        <button id="clearFilters">Clear Filters</button>
         <ul id="lamps" class="collection with-header" style="float: left;">
             <!-- look up ul! -->
             <li class="collection-header">

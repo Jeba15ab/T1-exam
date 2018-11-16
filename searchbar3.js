@@ -32,7 +32,7 @@ function displayCart() {
 we can make a class of them in the JS file.*/
 class Lamp {
 
-    constructor(type, color, price, imagePath, movie, character) { // TESTING movie & character      
+    constructor(type, color, price, imagePath, movie, universe) { // TESTING movie & universe      
       this.type = type;
       this.color = color;
       this.price = price;
@@ -42,20 +42,20 @@ class Lamp {
       } else {
         this.movie = movie; // TESTING
       }
-      if (!character) {
-        this.character = ""; 
+      if (!universe) {
+        this.universe = ""; 
       } else {
-        this.character = character; // TESTING
+        this.universe = universe; // TESTING
       }
     }
 
     createHTML(){
         return "<li class='collection-item'><div class='image'><img src='" + 
-        this.imagePath + "' width='200px' height='200px' /></div><a href='#'>" + 
-        this.type + " </a><div class='color'>" + 
+        this.imagePath + "' width='200px' height='200px' /></div><div>" + 
+        this.type + " </div><div class='color'>" + 
         this.color + "</div><div class='price'>" + 
         this.movie + "</div><div class='movie'>" +  // TESTING
-        this.character + "</div><div class='character'>" + // TESTING     
+        this.universe + "</div><div class='universe'>" + // TESTING     
         this.price + "</div><div class='button'><button class='addToCart' data-object='" + JSON.stringify(this) + "'>Add to Cart</button></li>";
     }
  }
@@ -390,98 +390,100 @@ lamps.push(new Lamp(
 );
 
 
-lamps.push(new Lamp(
-    "Floor Lamp",
-    "Red",
-    "399",
-    "https://www.eurway.com/Shared/Images/Product/Alp-Ceiling-Lamp/alp-ceiling-lamp.png?bw=75&bh=75")
-);
-lamps.push(new Lamp(
-    "Floor Lamp",
-    "Blue",
-    "199",
-    "LINK")
-);
-lamps.push(new Lamp(
-    "Floor Lamp",
-    "Green",
-    "599",
-    "LINK")
-);
-lamps.push(new Lamp(
-    "Floor Lamp",
-    "White",
-    "299",
-    "LINK")
-);
-lamps.push(new Lamp(
-    "Floor Lamp",
-    "Steel",
-    "899",
-    "LINK")
-);
-lamps.push(new Lamp(
-    "Floor Lamp",
-    "Rainbow",
-    "1399",
-    "LINK")
-);
-lamps.push(new Lamp(
-    "Floor Lamp",
-    "Orange",
-    "399",
-    "LINK")
-);
-lamps.push(new Lamp(
-    "Floor Lamp",
-    "Black",
-    "399",
-    "LINK")
-);
-lamps.push(new Lamp(
-    "Floor Lamp",
-    "Yellow",
-    "99",
-    "LINK")
-);
-lamps.push(new Lamp(
-    "Floor Lamp",
-    "Grey",
-    "499",
-    "LINK")
-);
-lamps.push(new Lamp(
-    "Floor Lamp",
-    "Glass",
-    "599",
-    "LINK")
-);
-lamps.push(new Lamp(
-    "Floor Lamp",
-    "Blue",
-    "299",
-    "LINK")
-);
-lamps.push(new Lamp(
-    "Floor Lamp",
-    "Black",
-    "699",
-    "LINK")
-);
-lamps.push(new Lamp(
-    "Floor Lamp",
-    "Red",
-    "699",
-    "LINK")
-);
-lamps.push(new Lamp(
-    "Floor Lamp",
-    "Steel",
-    "499",
-    "LINK")
-);}
 
- // THis is to display the Lamp array as soon as we reach the page
+// lamps.push(new Lamp(
+//     "Floor Lamp",
+//     "Red",
+//     "399",
+//     "https://www.eurway.com/Shared/Images/Product/Alp-Ceiling-Lamp/alp-ceiling-lamp.png?bw=75&bh=75")
+// );
+// lamps.push(new Lamp(
+//     "Floor Lamp",
+//     "Blue",
+//     "199",
+//     "LINK")
+// );
+// lamps.push(new Lamp(
+//     "Floor Lamp",
+//     "Green",
+//     "599",
+//     "LINK")
+// );
+// lamps.push(new Lamp(
+//     "Floor Lamp",
+//     "White",
+//     "299",
+//     "LINK")
+// );
+// lamps.push(new Lamp(
+//     "Floor Lamp",
+//     "Steel",
+//     "899",
+//     "LINK")
+// );
+// lamps.push(new Lamp(
+//     "Floor Lamp",
+//     "Rainbow",
+//     "1399",
+//     "LINK")
+// );
+// lamps.push(new Lamp(
+//     "Floor Lamp",
+//     "Orange",
+//     "399",
+//     "LINK")
+// );
+// lamps.push(new Lamp(
+//     "Floor Lamp",
+//     "Black",
+//     "399",
+//     "LINK")
+// );
+// lamps.push(new Lamp(
+//     "Floor Lamp",
+//     "Yellow",
+//     "99",
+//     "LINK")
+// );
+// lamps.push(new Lamp(
+//     "Floor Lamp",
+//     "Grey",
+//     "499",
+//     "LINK")
+// );
+// lamps.push(new Lamp(
+//     "Floor Lamp",
+//     "Glass",
+//     "599",
+//     "LINK")
+// );
+// lamps.push(new Lamp(
+//     "Floor Lamp",
+//     "Blue",
+//     "299",
+//     "LINK")
+// );
+// lamps.push(new Lamp(
+//     "Floor Lamp",
+//     "Black",
+//     "699",
+//     "LINK")
+// );
+// lamps.push(new Lamp(
+//     "Floor Lamp",
+//     "Red",
+//     "699",
+//     "LINK")
+// );
+// lamps.push(new Lamp(
+//     "Floor Lamp",
+//     "Steel",
+//     "499",
+//     "LINK")
+// );
+}
+
+ // This is to display the Lamp array as soon as we reach the page
 var content = ""
 
 for (var i = 0; i < lamps.length; i++) {
@@ -491,35 +493,92 @@ for (var i = 0; i < lamps.length; i++) {
 document.getElementById("lamps").innerHTML = content;
 addEvents();
 
-    // First we will grab the element by its ID! 
-var filterInput = document.getElementById('filterInput');
+// First we will grab the element by its ID! 
+var searchInput = document.getElementById('searchInput');
+var typeFilter = document.getElementById('type');
+var colorFilter = document.getElementById('color');
+var universeFilter = document.getElementById('universe');
+var clearFiltersButton = document.getElementById('clearFilters')
 
-// Now we add the event listener (keyUp), and then call the function that searches/filters through our lamp selection:
-filterInput.addEventListener('keyup', function(){
-    // We now need the value of the search. We do not just want the element, so we add Value in the end
-    var filterValue = document.getElementById('filterInput').value;
-    console.log(filterValue);
-    var filterValueLowerCase = '';
-    if(filterValue !== ''){
-        filterValueLowerCase = filterValue.toLowerCase();
+// Now we add the event listeners (keyUp), and then call the function that searches/filters through our lamp selection:
+searchInput.addEventListener('keyup', function(){
+    findItemsBySearchTermsAndOrFilters();
+});
+
+typeFilter.addEventListener('change', function() {
+    findItemsBySearchTermsAndOrFilters();
+});
+
+colorFilter.addEventListener('change', function() {
+    findItemsBySearchTermsAndOrFilters();
+});
+
+universeFilter.addEventListener('change', function() {
+    findItemsBySearchTermsAndOrFilters();
+});
+
+clearFiltersButton.addEventListener('click', function() {
+    typeFilter.value = '';
+    colorFilter.value = '';
+    universeFilter.value = '';
+    findItemsBySearchTermsAndOrFilters();
+});
+
+function findItemsBySearchTermsAndOrFilters() {
+    var html = "";
+    //Search bar element value(s). Each word is split by space and added to an array
+    var searchTermArray = searchInput.value.toLowerCase().split(' ');
+
+    //If the filter value of type does not exist in the search we add it to the array
+    var typeValue = typeFilter.value.toLowerCase();
+    if(searchTermArray.indexOf(typeValue) === -1) {
+        searchTermArray.push(typeValue);
     }
 
-    var html = "";
+    //If the filter value of color does not exist in the search we add it to the array
+    var colorValue = colorFilter.value.toLowerCase();
+    if(searchTermArray.indexOf(colorValue) === -1) {
+        searchTermArray.push(colorValue);
+    }
 
+    //If the filter value of universe does not exist in the search  we add it to the array
+    var universeValue = universeFilter.value.toLowerCase();
+    if(searchTermArray.indexOf(universeValue) === -1) {
+        searchTermArray.push(universeValue);
+    }
+        
+    //remove empty values
+    searchTermArray = searchTermArray.filter(Boolean);
     for (var i = 0; i < lamps.length; i++) {
-        if (lamps[i].type.toLowerCase().indexOf(filterValueLowerCase) > -1 || lamps[i].color.toLowerCase().indexOf(filterValueLowerCase) > -1
-            || lamps[i].price.indexOf(filterValueLowerCase) > -1
-            || lamps[i].movie.toLowerCase().indexOf(filterValueLowerCase) > -1 || lamps[i].character.toLowerCase().indexOf(filterValueLowerCase) > -1 
-        ) {
-            html += lamps[i].createHTML();
-        } else {
-            continue;
+        var lampObj = lamps[i];
+        //create a match array for each object iteration
+        var matches = [];
+        for(var property in lampObj) {
+            //ignore this property as it contains ambiguous values
+            if(property === 'imagePath') {
+                continue;
+            }
+
+            for (var j = 0; j < searchTermArray.length; j++) {
+                var searchTerm = searchTermArray[j];
+                //if the current property value contains a part of the search term, it gets added to the match array if it does not exist already.
+                if(lampObj[property].toLowerCase().indexOf(searchTerm) >= 0) {
+                    //only include matches once
+                    if(matches.indexOf(searchTerm) === -1) {
+                        matches.push(searchTerm);
+                    }
+                }
+            }
+        }
+
+        //if these two match, all the search terms are part of the object
+        if(matches.length === searchTermArray.length) {
+            html += lampObj.createHTML();
         }
     }
     document.getElementById("lamps").innerHTML = html;
     addEvents();
-});
-
+}
 
 function addEvents(){
     var buttons = document.getElementsByClassName("addToCart");
@@ -540,7 +599,7 @@ function addEvents(){
                 order.items.push(item)
                 
                 order.saveOrderToStorage();
-                var name = product.type + ", " + product.character + " from " + product.movie; 
+                var name = product.type + ", " + product.universe + " from " + product.movie; 
                 shoppingCart.addItemToCart(name, product.price, 1);
                 displayCart();
                 console.log(item)
