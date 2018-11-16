@@ -526,32 +526,17 @@ clearFiltersButton.addEventListener('click', function() {
 
 function findItemsBySearchTermsAndOrFilters() {
     var html = "";
-    //Search bar element value(s). Each word is split by space and added to an array
+    //search bar element value(s). Each word is split by space and added to an array
     var searchTermArray = searchInput.value.toLowerCase().split(' ');
 
-    //If the filter value of type does not exist in the search we add it to the array
-    var typeValue = typeFilter.value.toLowerCase();
-    if(searchTermArray.indexOf(typeValue) === -1) {
-        searchTermArray.push(typeValue);
-    }
-
-    //If the filter value of color does not exist in the search we add it to the array
-    var colorValue = colorFilter.value.toLowerCase();
-    if(searchTermArray.indexOf(colorValue) === -1) {
-        searchTermArray.push(colorValue);
-    }
-
-    //If the filter value of universe does not exist in the search  we add it to the array
-    var universeValue = universeFilter.value.toLowerCase();
-    if(searchTermArray.indexOf(universeValue) === -1) {
-        searchTermArray.push(universeValue);
-    }
+    //add filter values to the search term array
+    searchTermArray.push(typeFilter.value.toLowerCase(), colorFilter.value.toLowerCase(), universeFilter.value.toLowerCase());
         
     //remove empty values
     searchTermArray = searchTermArray.filter(Boolean);
     for (var i = 0; i < lamps.length; i++) {
         var lampObj = lamps[i];
-        //create a match array for each object iteration
+        //create an array of search term matches for each object iteration
         var matches = [];
         for(var property in lampObj) {
             //ignore this property as it contains ambiguous values
