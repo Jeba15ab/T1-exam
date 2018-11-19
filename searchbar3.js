@@ -29,7 +29,7 @@ function displayCart() {
 
     var deleteItemButtons = document.getElementsByClassName('delete-item');
 /* Instead of searching in the HTML for our objects (lamps), 
-we can make a class of them in the JS file.*/
+we have made a class of them in the JS file, and we can thereafter filter through that array*/
 class Lamp {
 
     constructor(type, color, price, imagePath, movie, universe) { // TESTING movie & universe      
@@ -54,8 +54,8 @@ class Lamp {
         this.imagePath + "' width='200px' height='200px' /></div><div>" + 
         this.type + " </div><div class='color'>" + 
         this.color + "</div><div class='price'>" + 
-        this.movie + "</div><div class='movie'>" +  // TESTING
-        this.universe + "</div><div class='universe'>" + // TESTING     
+        this.movie + "</div><div class='movie'>" + 
+        this.universe + "</div><div class='universe'>" +   
         this.price + "</div><div class='button'><button class='addToCart' data-object='" + JSON.stringify(this) + "'>Add to Cart</button></li>";
     }
  }
@@ -389,98 +389,96 @@ lamps.push(new Lamp(
     "Disney")
 );
 
+lamps.push(new Lamp(
+    "Desk Lamp",
+    "Black",
+    "359",
+    "Black Ceiling Lamp.jpg")
+);
 
+ lamps.push(new Lamp(
+     "Ceiling Lamp",
+     "Black",
+     "399",
+     "Black Ceiling Lamp 2.jpg")
+);
 
-// lamps.push(new Lamp(
-//     "Floor Lamp",
-//     "Red",
-//     "399",
-//     "https://www.eurway.com/Shared/Images/Product/Alp-Ceiling-Lamp/alp-ceiling-lamp.png?bw=75&bh=75")
-// );
-// lamps.push(new Lamp(
-//     "Floor Lamp",
-//     "Blue",
-//     "199",
-//     "LINK")
-// );
-// lamps.push(new Lamp(
-//     "Floor Lamp",
-//     "Green",
-//     "599",
-//     "LINK")
-// );
-// lamps.push(new Lamp(
-//     "Floor Lamp",
-//     "White",
-//     "299",
-//     "LINK")
-// );
-// lamps.push(new Lamp(
-//     "Floor Lamp",
-//     "Steel",
-//     "899",
-//     "LINK")
-// );
-// lamps.push(new Lamp(
-//     "Floor Lamp",
-//     "Rainbow",
-//     "1399",
-//     "LINK")
-// );
-// lamps.push(new Lamp(
-//     "Floor Lamp",
-//     "Orange",
-//     "399",
-//     "LINK")
-// );
-// lamps.push(new Lamp(
-//     "Floor Lamp",
-//     "Black",
-//     "399",
-//     "LINK")
-// );
-// lamps.push(new Lamp(
-//     "Floor Lamp",
-//     "Yellow",
-//     "99",
-//     "LINK")
-// );
-// lamps.push(new Lamp(
-//     "Floor Lamp",
-//     "Grey",
-//     "499",
-//     "LINK")
-// );
-// lamps.push(new Lamp(
-//     "Floor Lamp",
-//     "Glass",
-//     "599",
-//     "LINK")
-// );
-// lamps.push(new Lamp(
-//     "Floor Lamp",
-//     "Blue",
-//     "299",
-//     "LINK")
-// );
-// lamps.push(new Lamp(
-//     "Floor Lamp",
-//     "Black",
-//     "699",
-//     "LINK")
-// );
-// lamps.push(new Lamp(
-//     "Floor Lamp",
-//     "Red",
-//     "699",
-//     "LINK")
-// );
-// lamps.push(new Lamp(
-//     "Floor Lamp",
-//     "Steel",
-//     "499",
-//     "LINK")
-// );
+lamps.push(new Lamp(
+     "Ceiling Lamp",
+     "Blue",
+     "199",
+     "Blue Ceiling Lamp.jpg")
+);
+
+lamps.push(new Lamp(
+    "Ceiling Lamp",
+    "Blue",
+    "399",
+    "Blue Ceiling lamp 2.jpeg")
+);
+
+lamps.push(new Lamp(
+    "Ceiling Lamp",
+    "Green",
+    "499",
+    "Green Ceiling Lamp.jpg")
+);
+
+lamps.push(new Lamp(
+    "Ceiling Lamp",
+    "Grey",
+    "299",
+    "Grey Ceiling Lamp.jpg")
+);
+
+lamps.push(new Lamp(
+    "Ceiling Lamp",
+    "Orange",
+    "599",
+    "Orange Ceiling Lamp.jpg")
+);
+
+lamps.push(new Lamp(
+    "Ceiling Lamp",
+    "Pink",
+    "799",
+    "Pink Ceiling Lamp.jpg")
+);
+
+lamps.push(new Lamp(
+    "Ceiling Lamp",
+    "Purple",
+    "399",
+    "Purple Ceiling Lamp.jpg")
+);
+
+lamps.push(new Lamp(
+    "Ceiling Lamp",
+    "Rainbow",
+    "1499",
+    "Rainbow Ceiling Lamp.jpg")
+);
+
+lamps.push(new Lamp(
+    "Ceiling Lamp",
+    "Red",
+    "549",
+    "Red Ceiling Lamp.jpg")
+);
+
+lamps.push(new Lamp(
+    "Ceiling Lamp",
+    "White",
+    "665",
+    "White Ceiling Lamp.jpg")
+);
+
+lamps.push(new Lamp(
+    "Ceiling Lamp",
+    "Yellow",
+    "769",
+    "Yellow Ceiling Lamp.jpg")
+);
 }
 
  // This is to display the Lamp array as soon as we reach the page
@@ -493,14 +491,16 @@ for (var i = 0; i < lamps.length; i++) {
 document.getElementById("lamps").innerHTML = content;
 addEvents();
 
-// First we will grab the element by its ID! 
+/* This is where the search function beings, we first have a textbox where people can write out 
+ the search they want, and then add extra criteria with the drop down filter 
+ First we create the variables we need, then we add funtions to them */
 var searchInput = document.getElementById('searchInput');
 var typeFilter = document.getElementById('type');
 var colorFilter = document.getElementById('color');
 var universeFilter = document.getElementById('universe');
 var clearFiltersButton = document.getElementById('clearFilters')
 
-// Now we add the event listeners (keyUp), and then call the function that searches/filters through our lamp selection:
+// Now we add the event listeners (keyUp, change and click), and then call the function that searches/filters through our lamp selection:
 searchInput.addEventListener('keyup', function(){
     findItemsBySearchTermsAndOrFilters();
 });
@@ -524,22 +524,23 @@ clearFiltersButton.addEventListener('click', function() {
     findItemsBySearchTermsAndOrFilters();
 });
 
+// Now we have the actual search function, which searches through both the text box and filters.
 function findItemsBySearchTermsAndOrFilters() {
     var html = "";
-    //search bar element value(s). Each word is split by space and added to an array
+    //search bar element value(s). Each word is split by space and added to an array, this way we can write out all the criteria in the text box if preferred
     var searchTermArray = searchInput.value.toLowerCase().split(' ');
 
-    //add filter values to the search term array
+    //add filter values to the search term array, the Type, Coloer and Univers. NOTE, we need to add DC Comics, Anime and Regular as options (if we have time)! 
     searchTermArray.push(typeFilter.value.toLowerCase(), colorFilter.value.toLowerCase(), universeFilter.value.toLowerCase());
         
-    //remove empty values
+    //now we want to remove empty values, elaborate on this 
     searchTermArray = searchTermArray.filter(Boolean);
     for (var i = 0; i < lamps.length; i++) {
         var lampObj = lamps[i];
         //create an array of search term matches for each object iteration
         var matches = [];
         for(var property in lampObj) {
-            //ignore this property as it contains ambiguous values
+            //we also want to ignore this property as it contains ambiguous values, like the name of image file e.g. "Black Ceiling Lamp 2.jpg"
             if(property === 'imagePath') {
                 continue;
             }
@@ -548,7 +549,7 @@ function findItemsBySearchTermsAndOrFilters() {
                 var searchTerm = searchTermArray[j];
                 //if the current property value contains a part of the search term, it gets added to the match array if it does not exist already.
                 if(lampObj[property].toLowerCase().indexOf(searchTerm) >= 0) {
-                    //only include matches once
+                    //only include matches once, before it showed all the object for each time there was a match, super annoying
                     if(matches.indexOf(searchTerm) === -1) {
                         matches.push(searchTerm);
                     }
@@ -565,6 +566,7 @@ function findItemsBySearchTermsAndOrFilters() {
     addEvents();
 }
 
+// The shopping cart function, we could add a fixed shipping cost as soon as something is added? 
 function addEvents(){
     var buttons = document.getElementsByClassName("addToCart");
 
