@@ -1,10 +1,13 @@
+//creates a table based on the list of items in the cart
 function addItemsToCartTable() {
     var cartTable = document.getElementById('cart-table');
     cartTable.innerHTML = "";
     var cartItems = shoppingCart.listCart();
+    //create header for table if there any items in the cart, so it doesn't show before hand.
     if (cartItems.length > 0) {
         var header = cartTable.createTHead();
         var row = header.insertRow(0);
+        row.className = "cart-line-items-header";
         var deleteCell = row.insertCell(0);
         var nameCell = row.insertCell(1);
         nameCell.innerHTML = "Product Info";
@@ -15,27 +18,31 @@ function addItemsToCartTable() {
         priceCell.innerHTML = "Price";
     }
 
-    for (let index = 0; index < cartItems.length; index++) {
-        const element = cartItems[index];
-        var row = cartTable.insertRow(index + 1);
-        row.className = "cart-line-item-" + index + 1;
+    //create table rows for each cart item with cells for each property/action to display
+    for (let i = 0; i < cartItems.length; i++) {
+        const cartItem = cartItems[i];
+        //add row for cart item, parameter is i + 1, as the header has row 0 and an array always starts at 0, so first becomes 1, then 2 etc.
+        var row = cartTable.insertRow(i + 1);
+        //add class name to row in case styling should be added.
+        row.className = "cart-line-item";
+        //first cell in the row is the delete button
         var deleteCell = row.insertCell(0);
-        deleteCell.className = "delete"
-        deleteCell.innerHTML = "<button class='delete-item' data-name='" + element.name + "'>X</button>";
+        deleteCell.innerHTML = "<button class='delete-item' data-name='" + cartItem.name + "'>X</button>";
+        //second cell in the row is the name property
         var nameCell = row.insertCell(1);
-        nameCell.innerHTML = element.name;
-        nameCell.className = "name"
+        nameCell.innerHTML = cartItem.name;
+        //third cell is the subtract button
         var subtractCell = row.insertCell(2);
-        subtractCell.innerHTML = " <button class='subtract-item' data-name='" + element.name + "'>-</button>";
-        subtractCell.className = "subtract"
+        subtractCell.innerHTML = " <button class='subtract-item' data-name='" + cartItem.name + "'>-</button>";
+        //fourth cell is the quantity input field
         var quantityCell = row.insertCell(3);
-        quantityCell.innerHTML = "<input class='item-count' type='text' data-name='" + element.name + "' value='" + element.count + "' >";
-        quantityCell.className = "quantity"
+        quantityCell.innerHTML = "<input class='item-count' type='text' data-name='" + cartItem.name + "' value='" + cartItem.count + "' >";
+        //fifth cell is the addition button
         var plusCell = row.insertCell(4);
-        plusCell.innerHTML = " <button class='plus-item' data-name='" + element.name + "'>+</button>";
-        plusCell.className = "plus"
+        plusCell.innerHTML = " <button class='plus-item' data-name='" + cartItem.name + "'>+</button>";
+        //sixth cell is the price
         var priceCell = row.insertCell(5);
-        priceCell.innerHTML = element.total;
+        priceCell.innerHTML = cartItem.total;
     }
 
     var countCart = document.getElementById('count-cart');
@@ -86,36 +93,6 @@ function addItemsToCartTable() {
         shoppingCart.clearCart();
         addItemsToCartTable();
     });
-}
-
-function displayCart() {
-    var showCart = document.getElementById('count-cart');
-    var countCart = document.getElementById('count-cart');
-    var totalCart = document.getElementById('total-cart');
-
-    var cartArray = shoppingCart.listCart();
-    console.log(cartArray);
-    var output = "";
-    for (var i in cartArray) {
-        output += "<li>"
-            + cartArray[i].name
-            + " <input class='item-count' type='text' data-name='"
-            + cartArray[i].name
-            + "' value='" + cartArray[i].count + "' >"
-            + " x " + cartArray[i].price
-            + " = " + cartArray[i].total
-            + " <button class='plus-item' data-name='"
-            + cartArray[i].name + "'>+</button>"
-            + " <button class='subtract-item' data-name='"
-            + cartArray[i].name + "'>-</button>"
-            + " <button class='delete-item' data-name='"
-            + cartArray[i].name + "'>X</button>"
-            + "</li>";
-    }
-
-    showCart.innerHTML = output;
-    countCart.innerHTML = shoppingCart.countCart();
-    totalCart.innerHTML = shoppingCart.totalCart();
 }
 
 /* Instead of searching in the HTML for our objects (lamps), 
@@ -630,6 +607,7 @@ clearFiltersButton.addEventListener('click', function () {
 
 // Now we have the actual search function, which searches through both the text box and filters.
 function findItemsBySearchTermsAndOrFilters() {
+    console.log('bob')
     var html = "";
     //search bar element value(s). Each word is split by space and added to an array, this way we can write out all the criteria in the text box if preferred
     var searchTermArray = searchInput.value.toLowerCase().split(' ');
