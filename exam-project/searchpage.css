@@ -1,0 +1,39 @@
+body{
+    background-image: url('backgroundImage.jpg');
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+input{
+    font-family: "Roboto", sans-serif;
+    outline: 1;
+    background: #f2f2f2;
+    width: 20%;
+    padding: 5px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+select{
+    font-family: "Roboto", sans-serif;
+    outline: 1;
+    background: #f2f2f2;
+    width: 10%;
+    padding: 5px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+div.collection-item {
+    display: inline-block;
+    float:left;
+    margin: 5px;
+    border: 1px solid #ccc;
+    width: 50px;
+}
+
+div.image:hover {
+    border: 1px solid #777;
+}
+

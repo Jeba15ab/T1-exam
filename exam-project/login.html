@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+<!-- Layout inspired by a variety of tutorials and websites -->
+
+<div class="login-page">
+    <div class="form">
+        <form class="signIn-form" id="signInForm">
+        <input type="text" placeholder="E-mail" name="E-mail" id="E-mail" required = "true">
+        <br>
+        <input type="password" placeholder="Password" name="password" id="password" required = "true">
+        <br>
+        <br>
+        <button id="signIn" type="button">sign in</button>   
+        <br> 
+        <span id="signInResult"></span>
+        <br>
+        <p class="message">Not a Member? 
+            <br> 
+            <a href="#">Sign Up</a> </p>
+        </form> 
+
+    <form class="Register-form" id="registerForm">
+        <input type="text" placeholder="E-mail" name="registerEmail" id="registerEmail" required = "true">
+        <br>
+        <input type="text" placeholder="Full Name e.g. Sherlock Holmes" name="fullName" id="registerFullName" required = "true">
+        <br>
+        <input type="text" placeholder="Address, e.g. Bakerstreet 221B" name="streetName" id="registerStreetName" required = "true">
+        <br>
+        <input type="text" placeholder="Zip Code" name="zipCode" id="registerZipCode" required = "true">
+        <br>
+        <input type="text" placeholder="City" name="city" id="city" required = "true">
+        <input type="password" placeholder="Password" name="registerPassword" id="registerPassword" required = "true">
+        <input type="password" placeholder="Repeat Password" name="repeatPassword" id="repeatPassword" required = "true">
+            <br>
+        <button id="register" type="button">Register New User</button>
+        <br>
+        <span id="registerResult"></span>
+        <br>
+        <p class="message">Already a Member? 
+                <br> 
+                <a href="#">Sign In</a> </p>
+    </form>
+    </div>
+</div>
+<!-- We used jQuery for the animation effect, see link below -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+    $('.message a').click(function() {
+        $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+    });
+    </script>
+
+    <script src="login.js"></script>
+
+</body>
+</html>
