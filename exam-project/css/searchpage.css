@@ -83,3 +83,8 @@ input[type=button] {
     color:white;
     padding-top: 1px;
 }
+.logout {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+}
