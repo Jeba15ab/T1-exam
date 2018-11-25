@@ -9,17 +9,23 @@ body{
     width: 20px;
 }
 .cart-container {
-    float: right;
     width: 35%;
     text-align: right;
-    display: inline-block;
+    position: fixed;
+    right: 0;
+    top: 0;
+    padding-right: 25px;
+    padding-top: 25px;
 }
 .cart-table {
     display: inline-block;
 }
 .item-container {
     float: left;
-    width: 60%;
+    width: 70%;
+}
+.items {
+    padding-left: inherit;
 }
 .item {
     display: inline-block;
@@ -61,7 +67,6 @@ div.image:hover {
 tr {
     text-align: left;
 }
-
 input[type=button] {
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
@@ -73,4 +78,8 @@ input[type=button] {
     font-size: 14px;
     cursor: pointer;
     margin-top: 20px;
+}
+.text {
+    color:white;
+    padding-top: 1px;
 }
