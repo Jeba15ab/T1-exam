@@ -1,0 +1,62 @@
+body{
+    background-image: url('../images/backgroundImage.jpg');
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+.item-count {
+    width: 20px;
+}
+.cart-container {
+    float: right;
+    width: 35%;
+    text-align: right;
+}
+.cart-table {
+    display: inline-block;
+}
+.item-container {
+    float: left;
+    width: 60%;
+}
+.item {
+    display: inline-block;
+    margin: 5px;
+    color: white;
+}
+.filter {
+    margin-top: 10px;
+}
+.search-input {
+    font-family: "Roboto", sans-serif;
+    outline: 1;
+    background: #f2f2f2;
+    width: 30.5%;
+    padding: 5px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+select, .clear-filter {
+    font-family: "Roboto", sans-serif;
+    outline: 1;
+    background: #f2f2f2;
+    width: 10%;
+    padding: 5px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+.clear-filter {
+    width: 5.5%
+}
+div.image:hover {
+    border: 1px solid #777;
+}
+.addToCart {
+    background-color: green;
+    border: green;
+    color: white;
+}
+tr {
+    text-align: left;
+}
